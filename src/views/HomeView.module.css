@@ -1,0 +1,81 @@
+.view {
+  padding-bottom: 2rem;
+}
+
+.header {
+  margin-bottom: 1.5rem;
+  padding-bottom: 1rem;
+  border-bottom: 1px solid #2a3a5c;
+}
+
+.dayLabel {
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: #4fc3f7;
+  margin-bottom: 0.25rem;
+}
+
+.dayName {
+  font-size: 1.4rem;
+  font-weight: 700;
+  color: #e0e0e0;
+  line-height: 1.2;
+}
+
+.startedAt {
+  font-size: 0.8rem;
+  color: #666;
+  margin-top: 0.25rem;
+}
+
+.startBtn {
+  display: block;
+  width: 100%;
+  padding: 1rem;
+  background: #4fc3f7;
+  color: #1a1a2e;
+  border: none;
+  border-radius: 12px;
+  font-size: 1.1rem;
+  font-weight: 700;
+  cursor: pointer;
+  min-height: 56px;
+  letter-spacing: 0.02em;
+}
+
+.startBtn:hover {
+  background: #81d4fa;
+}
+
+.finishBtn {
+  display: block;
+  width: 100%;
+  padding: 1rem;
+  background: #1b5e3b;
+  color: #81c995;
+  border: 1px solid #2e7d52;
+  border-radius: 12px;
+  font-size: 1rem;
+  font-weight: 700;
+  cursor: pointer;
+  min-height: 56px;
+  margin-top: 0.5rem;
+  letter-spacing: 0.02em;
+}
+
+.finishBtn:hover {
+  background: #2e7d52;
+}
+
+.empty {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 60vh;
+  gap: 0.5rem;
+  color: #666;
+  text-align: center;
+  line-height: 1.6;
+}

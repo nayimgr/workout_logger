@@ -1,0 +1,116 @@
+.card {
+  background: #16213e;
+  border: 1px solid #2a3a5c;
+  border-radius: 12px;
+  padding: 0.75rem;
+  margin-bottom: 1rem;
+}
+
+.dayHeader {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-bottom: 0.5rem;
+}
+
+.dragIcon {
+  color: #555;
+  cursor: grab;
+  font-size: 1rem;
+  user-select: none;
+  flex-shrink: 0;
+}
+
+.dayName {
+  flex: 1;
+  background: transparent;
+  border: none;
+  border-bottom: 1px solid #2a4a7f;
+  color: #e0e0e0;
+  font-size: 1rem;
+  font-weight: 600;
+  padding: 0.25rem 0;
+  min-width: 0;
+}
+
+.dayName:focus {
+  outline: none;
+  border-bottom-color: #4fc3f7;
+}
+
+.removeDay {
+  background: none;
+  border: none;
+  font-size: 1rem;
+  cursor: pointer;
+  padding: 0;
+  min-width: 44px;
+  min-height: 44px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  opacity: 0.7;
+}
+
+.removeDay:hover { opacity: 1; }
+
+.exHeader {
+  display: flex;
+  align-items: center;
+  gap: 0.3rem;
+  font-size: 0.65rem;
+  color: #555;
+  text-align: center;
+  margin-bottom: 0.1rem;
+  padding: 0 0.25rem;
+}
+
+.colLabel {
+  flex-shrink: 0;
+  width: 3rem;
+  text-align: center;
+}
+
+.empty {
+  color: #555;
+  font-size: 0.85rem;
+  text-align: center;
+  padding: 0.5rem 0;
+}
+
+.addEx {
+  display: flex;
+  gap: 0.5rem;
+  margin-top: 0.75rem;
+}
+
+.exInput {
+  flex: 1;
+  background: #0f3460;
+  border: 1px solid #2a4a7f;
+  border-radius: 8px;
+  color: #e0e0e0;
+  padding: 0.5rem;
+  font-size: 0.9rem;
+  min-width: 0;
+}
+
+.exInput:focus {
+  outline: 2px solid #4fc3f7;
+}
+
+.addBtn {
+  background: #4fc3f7;
+  color: #1a1a2e;
+  border: none;
+  border-radius: 8px;
+  padding: 0.5rem 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  font-size: 0.9rem;
+  flex-shrink: 0;
+  min-height: 44px;
+}
+
+.addBtn:hover { background: #81d4fa; }

@@ -1,0 +1,74 @@
+.row {
+  display: flex;
+  align-items: center;
+  gap: 0.3rem;
+  padding: 0.4rem 0;
+  border-bottom: 1px solid #1e2d4a;
+}
+
+.row:last-child {
+  border-bottom: none;
+}
+
+.handle {
+  color: #555;
+  cursor: grab;
+  font-size: 1rem;
+  padding: 0 4px;
+  flex-shrink: 0;
+  user-select: none;
+}
+
+.handle:active {
+  cursor: grabbing;
+}
+
+.field {
+  background: #0f3460;
+  border: 1px solid #2a4a7f;
+  border-radius: 6px;
+  color: #e0e0e0;
+  padding: 0.35rem 0.4rem;
+  font-size: 0.85rem;
+  min-width: 0;
+  -moz-appearance: textfield;
+}
+
+.field::-webkit-outer-spin-button,
+.field::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+}
+
+.field:focus {
+  outline: 2px solid #4fc3f7;
+}
+
+.name {
+  flex: 1;
+}
+
+.weight {
+  width: 3.5rem;
+  flex-shrink: 0;
+}
+
+.sep {
+  color: #555;
+  font-size: 0.8rem;
+  flex-shrink: 0;
+}
+
+.remove {
+  background: none;
+  border: none;
+  color: #e57373;
+  font-size: 1.2rem;
+  cursor: pointer;
+  padding: 0;
+  min-width: 32px;
+  min-height: 44px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
