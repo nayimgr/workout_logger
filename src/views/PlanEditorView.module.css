@@ -10,7 +10,7 @@
 
 .hint {
   font-size: 0.78rem;
-  color: #555;
+  color: var(--text-dim);
   margin-bottom: 1.25rem;
 }
 
@@ -22,22 +22,22 @@
 
 .dayInput {
   flex: 1;
-  background: #16213e;
-  border: 1px solid #2a4a7f;
+  background: var(--surface);
+  border: 1px solid var(--border-2);
   border-radius: 8px;
-  color: #e0e0e0;
+  color: var(--text);
   padding: 0.6rem 0.75rem;
   font-size: 0.9rem;
   min-width: 0;
 }
 
 .dayInput:focus {
-  outline: 2px solid #4fc3f7;
+  outline: 2px solid var(--accent);
 }
 
 .addBtn {
-  background: #4fc3f7;
-  color: #1a1a2e;
+  background: var(--accent);
+  color: var(--bg);
   border: none;
   border-radius: 8px;
   padding: 0.6rem 1rem;
@@ -48,4 +48,4 @@
   min-height: 44px;
 }
 
-.addBtn:hover { background: #81d4fa; }
+.addBtn:hover { background: var(--accent-hover); }

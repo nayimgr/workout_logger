@@ -1,6 +1,6 @@
 .card {
-  background: #16213e;
-  border: 1px solid #2a3a5c;
+  background: var(--surface);
+  border: 1px solid var(--border);
   border-radius: 12px;
   padding: 1rem;
   margin-bottom: 1rem;
@@ -9,12 +9,12 @@
 .name {
   font-size: 1rem;
   font-weight: 600;
-  color: #e0e0e0;
+  color: var(--text);
   margin-bottom: 0.2rem;
 }
 
 .subtitle {
   font-size: 0.72rem;
-  color: #555;
+  color: var(--text-dim);
   margin-bottom: 0.75rem;
 }

@@ -9,8 +9,8 @@
 }
 
 .card {
-  background: #16213e;
-  border: 1px solid #2a3a5c;
+  background: var(--surface);
+  border: 1px solid var(--border);
   border-radius: 12px;
   padding: 0.9rem 1rem;
   margin-bottom: 1rem;
@@ -27,12 +27,12 @@
 .dayName {
   font-weight: 700;
   font-size: 1rem;
-  color: #4fc3f7;
+  color: var(--accent);
 }
 
 .date {
   font-size: 0.75rem;
-  color: #666;
+  color: var(--text-dim);
   flex-shrink: 0;
 }
 
@@ -46,7 +46,7 @@
 
 .exName {
   font-size: 0.85rem;
-  color: #aaa;
+  color: var(--text-muted);
   margin-bottom: 0.2rem;
 }
 
@@ -57,11 +57,11 @@
 }
 
 .set {
-  background: #0f3460;
+  background: var(--surface-2);
   border-radius: 6px;
   padding: 0.2rem 0.5rem;
   font-size: 0.8rem;
-  color: #e0e0e0;
+  color: var(--text);
 }
 
 .empty {
@@ -71,7 +71,7 @@
   justify-content: center;
   height: 60vh;
   gap: 0.5rem;
-  color: #555;
+  color: var(--text-dim);
   text-align: center;
   line-height: 1.6;
 }

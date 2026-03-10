@@ -8,16 +8,16 @@
 
 .setNum {
   text-align: center;
-  color: #888;
+  color: var(--text-muted);
   font-size: 0.85rem;
   font-weight: 600;
 }
 
 .input {
-  background: #0f3460;
-  border: 1px solid #2a4a7f;
+  background: var(--surface-2);
+  border: 1px solid var(--border-2);
   border-radius: 8px;
-  color: #e0e0e0;
+  color: var(--text);
   padding: 0.5rem;
   text-align: center;
   width: 100%;
@@ -31,14 +31,14 @@
 }
 
 .input:focus {
-  outline: 2px solid #4fc3f7;
+  outline: 2px solid var(--accent);
   border-color: transparent;
 }
 
 .remove {
   background: none;
   border: none;
-  color: #e57373;
+  color: var(--danger);
   font-size: 1.3rem;
   cursor: pointer;
   line-height: 1;

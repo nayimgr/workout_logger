@@ -16,9 +16,9 @@
 
 .editBtn {
   background: none;
-  border: 1px solid #2a3a5c;
+  border: 1px solid var(--border);
   border-radius: 8px;
-  color: #4fc3f7;
+  color: var(--accent);
   padding: 0.35rem 0.9rem;
   font-size: 0.85rem;
   cursor: pointer;
@@ -27,10 +27,10 @@
 .textarea {
   width: 100%;
   min-height: 60vh;
-  background: #0f3460;
-  border: 1px solid #2a4a7f;
+  background: var(--surface-2);
+  border: 1px solid var(--border-2);
   border-radius: 10px;
-  color: #e0e0e0;
+  color: var(--text);
   padding: 0.75rem;
   font-size: 0.95rem;
   line-height: 1.6;
@@ -39,15 +39,15 @@
 }
 
 .textarea:focus {
-  outline: 2px solid #4fc3f7;
+  outline: 2px solid var(--accent);
 }
 
 .saveBtn {
   display: block;
   width: 100%;
   padding: 0.8rem;
-  background: #4fc3f7;
-  color: #1a1a2e;
+  background: var(--accent);
+  color: var(--bg);
   border: none;
   border-radius: 10px;
   font-size: 1rem;
@@ -58,7 +58,7 @@
 .content {
   font-size: 0.95rem;
   line-height: 1.7;
-  color: #ccc;
+  color: var(--text-muted);
 }
 
 .line {
@@ -66,5 +66,45 @@
 }
 
 .empty {
-  color: #555;
+  color: var(--text-dim);
+}
+
+.markdown h1, .markdown h2, .markdown h3 {
+  color: var(--text);
+  margin: 1rem 0 0.4rem;
+  font-weight: 700;
+}
+
+.markdown h1 { font-size: 1.2rem; }
+.markdown h2 { font-size: 1.05rem; }
+.markdown h3 { font-size: 0.95rem; }
+
+.markdown p {
+  margin: 0.4rem 0;
+}
+
+.markdown ul, .markdown ol {
+  padding-left: 1.4rem;
+  margin: 0.4rem 0;
+}
+
+.markdown li {
+  margin: 0.2rem 0;
+}
+
+.markdown strong {
+  color: var(--text);
+}
+
+.markdown code {
+  background: var(--surface-2);
+  border-radius: 4px;
+  padding: 0.1em 0.4em;
+  font-size: 0.9em;
+}
+
+.markdown hr {
+  border: none;
+  border-top: 1px solid var(--border);
+  margin: 1rem 0;
 }

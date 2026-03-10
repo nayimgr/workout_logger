@@ -1,4 +1,5 @@
 import { useState } from 'react'
+import { marked } from 'marked'
 import { useStorage } from '../hooks/useStorage'
 import styles from './NotesView.module.css'
 
@@ -39,9 +40,10 @@ export default function NotesView() {
       ) : (
         <div className={styles.content}>
           {notes
-            ? notes.split('\n').map((line, i) => (
-                <p key={i} className={styles.line}>{line || <br />}</p>
-              ))
+            ? <div
+                className={styles.markdown}
+                dangerouslySetInnerHTML={{ __html: marked.parse(notes) }}
+              />
             : <p className={styles.empty}>No notes yet. Tap Edit to add some.</p>
           }
         </div>
