@@ -3,7 +3,9 @@ import styles from './TabBar.module.css'
 const TABS = [
   { id: 'home',     label: 'Today',    icon: '🏋️' },
   { id: 'plan',     label: 'Plan',     icon: '📋' },
+  { id: 'history',  label: 'History',  icon: '🗓️' },
   { id: 'progress', label: 'Progress', icon: '📈' },
+  { id: 'notes',    label: 'Notes',    icon: '📝' },
 ]
 
 export default function TabBar({ activeTab, onTabChange }) {

@@ -3,7 +3,7 @@ import { buildVolumeSeriesByExercise } from '../utils/chartData'
 import ExerciseChart from '../components/ExerciseChart'
 import styles from './ProgressView.module.css'
 
-const KEYS = ['wl_plan', 'wl_day_index', 'wl_sessions']
+const KEYS = ['wl_plan', 'wl_day_index', 'wl_sessions', 'wl_notes']
 
 function exportData() {
   const data = {}

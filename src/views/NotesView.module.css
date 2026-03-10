@@ -1,0 +1,70 @@
+.view {
+  padding-bottom: 2rem;
+}
+
+.titleRow {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 1.25rem;
+}
+
+.title {
+  font-size: 1.4rem;
+  font-weight: 700;
+}
+
+.editBtn {
+  background: none;
+  border: 1px solid #2a3a5c;
+  border-radius: 8px;
+  color: #4fc3f7;
+  padding: 0.35rem 0.9rem;
+  font-size: 0.85rem;
+  cursor: pointer;
+}
+
+.textarea {
+  width: 100%;
+  min-height: 60vh;
+  background: #0f3460;
+  border: 1px solid #2a4a7f;
+  border-radius: 10px;
+  color: #e0e0e0;
+  padding: 0.75rem;
+  font-size: 0.95rem;
+  line-height: 1.6;
+  resize: vertical;
+  margin-bottom: 0.75rem;
+}
+
+.textarea:focus {
+  outline: 2px solid #4fc3f7;
+}
+
+.saveBtn {
+  display: block;
+  width: 100%;
+  padding: 0.8rem;
+  background: #4fc3f7;
+  color: #1a1a2e;
+  border: none;
+  border-radius: 10px;
+  font-size: 1rem;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.content {
+  font-size: 0.95rem;
+  line-height: 1.7;
+  color: #ccc;
+}
+
+.line {
+  margin: 0;
+}
+
+.empty {
+  color: #555;
+}
