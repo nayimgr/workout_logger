@@ -3,32 +3,51 @@ import ExerciseLogger from '../components/ExerciseLogger'
 import styles from './HomeView.module.css'
 
 export default function HomeView({ planApi, sessionApi }) {
-  const { currentDay, advanceDay } = planApi
+  const { plan, currentDay, currentDayIndex, advanceDay } = planApi
   const { sessions, startSession, logSet, addSet, removeSet } = sessionApi
 
   const today = new Date().toISOString().slice(0, 10)
 
+  const [selectedDayId, setSelectedDayId] = useState(() => currentDay?.id ?? null)
+
+  const selectedDay = plan.days.find(d => d.id === selectedDayId) ?? currentDay
+
   const [activeSessionId, setActiveSessionId] = useState(() => {
-    if (!currentDay) return null
+    if (!selectedDay) return null
     const existing = [...sessions].reverse().find(
-      s => s.date.startsWith(today) && s.dayId === currentDay.id
+      s => s.date.startsWith(today) && s.dayId === selectedDay.id
     )
     return existing?.id ?? null
   })
 
   const activeSession = sessions.find(s => s.id === activeSessionId) ?? null
 
+  function handleSelectDay(day) {
+    setSelectedDayId(day.id)
+    const existing = [...sessions].reverse().find(
+      s => s.date.startsWith(today) && s.dayId === day.id
+    )
+    setActiveSessionId(existing?.id ?? null)
+  }
+
   function handleStart() {
-    const id = startSession(currentDay.id, currentDay.exercises)
+    const id = startSession(selectedDay.id, selectedDay.exercises)
     setActiveSessionId(id)
   }
 
   function handleFinish() {
-    advanceDay()
+    // advance to next day after the selected one
+    const idx = plan.days.findIndex(d => d.id === selectedDay.id)
+    if (idx !== -1) {
+      const nextIdx = (idx + 1) % plan.days.length
+      // update stored index by advancing from current until we reach nextIdx
+      const steps = (nextIdx - currentDayIndex + plan.days.length) % plan.days.length
+      for (let i = 0; i < steps; i++) advanceDay()
+    }
     setActiveSessionId(null)
   }
 
-  if (!currentDay) {
+  if (!selectedDay) {
     return (
       <div className={styles.empty}>
         <p>No workout days configured.</p>
@@ -41,15 +60,29 @@ export default function HomeView({ planApi, sessionApi }) {
     <div className={styles.view}>
       <header className={styles.header}>
         <div className={styles.dayLabel}>Today</div>
-        <h1 className={styles.dayName}>{currentDay.name}</h1>
-        {activeSession && (
-          <p className={styles.startedAt}>
-            Started at{' '}
-            {new Date(activeSession.date).toLocaleTimeString([], {
-              hour: '2-digit',
-              minute: '2-digit',
-            })}
-          </p>
+        {!activeSession ? (
+          <div className={styles.dayPicker}>
+            {plan.days.map(d => (
+              <button
+                key={d.id}
+                className={`${styles.dayPill} ${d.id === selectedDay.id ? styles.dayPillActive : ''}`}
+                onClick={() => handleSelectDay(d)}
+              >
+                {d.name}
+              </button>
+            ))}
+          </div>
+        ) : (
+          <>
+            <h1 className={styles.dayName}>{selectedDay.name}</h1>
+            <p className={styles.startedAt}>
+              Started at{' '}
+              {new Date(activeSession.date).toLocaleTimeString([], {
+                hour: '2-digit',
+                minute: '2-digit',
+              })}
+            </p>
+          </>
         )}
       </header>
 
@@ -59,7 +92,7 @@ export default function HomeView({ planApi, sessionApi }) {
         </button>
       ) : (
         <>
-          {currentDay.exercises.map(exercise => {
+          {selectedDay.exercises.map(exercise => {
             const sessionEx = activeSession.exercises.find(
               e => e.exerciseId === exercise.id
             )

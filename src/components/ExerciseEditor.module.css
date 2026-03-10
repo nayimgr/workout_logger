@@ -47,9 +47,17 @@
   flex: 1;
 }
 
-.weight {
-  width: 3.5rem;
+.sets,
+.reps {
+  width: 2.4rem;
   flex-shrink: 0;
+  text-align: center;
+}
+
+.weight {
+  width: 3.2rem;
+  flex-shrink: 0;
+  text-align: center;
 }
 
 .sep {

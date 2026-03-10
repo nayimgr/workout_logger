@@ -23,6 +23,29 @@
   line-height: 1.2;
 }
 
+.dayPicker {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin-top: 0.25rem;
+}
+
+.dayPill {
+  padding: 0.4rem 0.9rem;
+  border: 1px solid #2a3a5c;
+  border-radius: 20px;
+  background: transparent;
+  color: #aaa;
+  font-size: 0.85rem;
+  cursor: pointer;
+}
+
+.dayPillActive {
+  border-color: #4fc3f7;
+  color: #4fc3f7;
+  background: rgba(79, 195, 247, 0.08);
+}
+
 .startedAt {
   font-size: 0.8rem;
   color: #666;

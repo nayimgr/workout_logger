@@ -13,7 +13,7 @@ export default function ExerciseEditor({ exercise, onUpdate, onRemove, dragHandl
         placeholder="Exercise name"
       />
       <input
-        className={styles.field}
+        className={`${styles.field} ${styles.sets}`}
         type="number"
         value={exercise.targetSets}
         onChange={e => onUpdate({ targetSets: Number(e.target.value) })}
@@ -23,7 +23,7 @@ export default function ExerciseEditor({ exercise, onUpdate, onRemove, dragHandl
       />
       <span className={styles.sep}>×</span>
       <input
-        className={styles.field}
+        className={`${styles.field} ${styles.reps}`}
         type="number"
         value={exercise.targetReps}
         onChange={e => onUpdate({ targetReps: Number(e.target.value) })}
