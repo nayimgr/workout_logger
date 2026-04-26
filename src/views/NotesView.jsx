@@ -3,8 +3,19 @@ import { marked } from 'marked'
 import { useStorage } from '../hooks/useStorage'
 import styles from './NotesView.module.css'
 
+function toHtml(text) {
+  try {
+    return marked.parse(text, { async: false })
+  } catch {
+    return ''
+  }
+}
+
 export default function NotesView() {
-  const [notes, setNotes] = useStorage('wl_notes', '')
+  const [rawNotes, setNotes] = useStorage('wl_notes', '')
+  // Normalise: localStorage could contain non-string data from a bad import
+  const notes = typeof rawNotes === 'string' ? rawNotes : ''
+
   const [editing, setEditing] = useState(false)
   const [draft, setDraft] = useState(notes)
 
@@ -42,7 +53,7 @@ export default function NotesView() {
           {notes
             ? <div
                 className={styles.markdown}
-                dangerouslySetInnerHTML={{ __html: marked.parse(notes, { async: false }) }}
+                dangerouslySetInnerHTML={{ __html: toHtml(notes) }}
               />
             : <p className={styles.empty}>No notes yet. Tap Edit to add some.</p>
           }
