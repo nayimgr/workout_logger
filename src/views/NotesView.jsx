@@ -42,7 +42,7 @@ export default function NotesView() {
           {notes
             ? <div
                 className={styles.markdown}
-                dangerouslySetInnerHTML={{ __html: marked.parse(notes) }}
+                dangerouslySetInnerHTML={{ __html: marked.parseSync(notes) }}
               />
             : <p className={styles.empty}>No notes yet. Tap Edit to add some.</p>
           }

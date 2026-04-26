@@ -15,6 +15,7 @@ export default function ExerciseEditor({ exercise, onUpdate, onRemove, dragHandl
       <input
         className={`${styles.field} ${styles.sets}`}
         type="number"
+        inputMode="numeric"
         value={exercise.targetSets}
         onChange={e => onUpdate({ targetSets: Number(e.target.value) })}
         aria-label="Target sets"
@@ -25,6 +26,7 @@ export default function ExerciseEditor({ exercise, onUpdate, onRemove, dragHandl
       <input
         className={`${styles.field} ${styles.reps}`}
         type="number"
+        inputMode="numeric"
         value={exercise.targetReps}
         onChange={e => onUpdate({ targetReps: Number(e.target.value) })}
         aria-label="Target reps"
@@ -35,6 +37,7 @@ export default function ExerciseEditor({ exercise, onUpdate, onRemove, dragHandl
       <input
         className={`${styles.field} ${styles.weight}`}
         type="number"
+        inputMode="decimal"
         value={exercise.targetWeight}
         onChange={e => onUpdate({ targetWeight: Number(e.target.value) })}
         aria-label="Target weight kg"

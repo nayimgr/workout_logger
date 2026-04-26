@@ -23,6 +23,8 @@ export function useSessions() {
           exercises: session.exercises.map(ex => {
             if (ex.exerciseId !== exerciseId) return ex
             const sets = [...ex.sets]
+            // Fill any gaps so we never produce a sparse array
+            while (sets.length <= setIndex) sets.push({ reps: '', weight: '' })
             sets[setIndex] = { reps, weight }
             return { ...ex, sets }
           }),

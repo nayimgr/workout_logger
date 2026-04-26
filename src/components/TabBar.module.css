@@ -3,6 +3,8 @@
   border-top: 1px solid var(--border-2);
   background: var(--surface);
   flex-shrink: 0;
+  /* Push content above the iOS home indicator in standalone PWA mode */
+  padding-bottom: env(safe-area-inset-bottom);
 }
 
 .tab {

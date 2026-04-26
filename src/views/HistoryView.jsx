@@ -46,6 +46,7 @@ export default function HistoryView({ planApi, sessionApi }) {
                   <div className={styles.exName}>{exInfo.name}</div>
                   <div className={styles.sets}>
                     {ex.sets.map((set, i) => {
+                      if (!set) return null
                       const reps = parseFloat(set.reps)
                       const weight = parseFloat(set.weight)
                       const hasData = !isNaN(reps) || !isNaN(weight)

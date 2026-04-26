@@ -10,11 +10,17 @@ export default function ExerciseLogger({
 }) {
   const { name, targetSets, targetReps, targetWeight } = exercise
 
-  // Pre-fill empty rows up to targetSets if none logged yet
+  // Always show at least targetSets rows; once the user logs past that, show all logged sets
   const displaySets =
-    sessionSets.length > 0
+    sessionSets.length >= targetSets
       ? sessionSets
-      : Array.from({ length: targetSets }, () => ({ reps: '', weight: '' }))
+      : [
+          ...sessionSets,
+          ...Array.from(
+            { length: targetSets - sessionSets.length },
+            () => ({ reps: '', weight: '' })
+          ),
+        ]
 
   return (
     <section className={styles.card}>
