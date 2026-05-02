@@ -2,7 +2,14 @@ import styles from './HistoryView.module.css'
 
 export default function HistoryView({ planApi, sessionApi }) {
   const { plan } = planApi
-  const { sessions } = sessionApi
+  const { sessions, deleteSession } = sessionApi
+
+  function handleDelete(session, dayName) {
+    const date = new Date(session.date).toLocaleDateString()
+    if (confirm(`Delete the ${dayName} session from ${date}? This can't be undone.`)) {
+      deleteSession(session.id)
+    }
+  }
 
   const exerciseById = {}
   plan.days.forEach(d => d.exercises.forEach(e => { exerciseById[e.id] = e }))
@@ -37,6 +44,14 @@ export default function HistoryView({ planApi, sessionApi }) {
             <div className={styles.cardHeader}>
               <span className={styles.dayName}>{day?.name ?? 'Unknown day'}</span>
               <span className={styles.date}>{dateStr} · {timeStr}</span>
+              <button
+                className={styles.delete}
+                onClick={() => handleDelete(session, day?.name ?? 'Unknown day')}
+                aria-label="Delete session"
+                title="Delete session"
+              >
+                🗑
+              </button>
             </div>
             {session.note && (
               <p className={styles.note}>{session.note}</p>

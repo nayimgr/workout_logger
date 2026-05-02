@@ -15,6 +15,10 @@ export function useSessions() {
     return session.id
   }
 
+  function deleteSession(sessionId) {
+    setSessions(prev => prev.filter(s => s.id !== sessionId))
+  }
+
   function setSessionNote(sessionId, note) {
     setSessions(prev =>
       prev.map(session =>
@@ -72,5 +76,5 @@ export function useSessions() {
     )
   }
 
-  return { sessions, startSession, setSessionNote, logSet, addSet, removeSet }
+  return { sessions, startSession, deleteSession, setSessionNote, logSet, addSet, removeSet }
 }
