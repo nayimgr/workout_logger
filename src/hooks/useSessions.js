@@ -8,10 +8,19 @@ export function useSessions() {
       id: Date.now().toString(),
       date: new Date().toISOString(),
       dayId,
+      note: '',
       exercises: exercises.map(e => ({ exerciseId: e.id, sets: [] })),
     }
     setSessions(s => [...s, session])
     return session.id
+  }
+
+  function setSessionNote(sessionId, note) {
+    setSessions(prev =>
+      prev.map(session =>
+        session.id === sessionId ? { ...session, note } : session
+      )
+    )
   }
 
   function logSet(sessionId, exerciseId, setIndex, reps, weight, rir) {
@@ -63,5 +72,5 @@ export function useSessions() {
     )
   }
 
-  return { sessions, startSession, logSet, addSet, removeSet }
+  return { sessions, startSession, setSessionNote, logSet, addSet, removeSet }
 }

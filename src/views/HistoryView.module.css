@@ -36,6 +36,17 @@
   flex-shrink: 0;
 }
 
+.note {
+  font-size: 0.85rem;
+  color: var(--text-muted);
+  font-style: italic;
+  background: var(--surface-2);
+  border-radius: 6px;
+  padding: 0.4rem 0.6rem;
+  margin: 0 0 0.75rem;
+  white-space: pre-wrap;
+}
+
 .exercise {
   margin-bottom: 0.5rem;
 }

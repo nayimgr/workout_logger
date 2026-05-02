@@ -5,7 +5,7 @@ import styles from './PlanEditorView.module.css'
 export default function PlanEditorView({ planApi }) {
   const {
     plan,
-    addDay, removeDay, renameDay, reorderDays,
+    addDay, removeDay, renameDay, updateDay, reorderDays,
     addExercise, removeExercise, updateExercise, reorderExercises,
   } = planApi
 
@@ -40,6 +40,7 @@ export default function PlanEditorView({ planApi }) {
           day={day}
           index={index}
           onRename={name => renameDay(day.id, name)}
+          onUpdateDay={fields => updateDay(day.id, fields)}
           onRemoveDay={() => removeDay(day.id)}
           onAddExercise={name => addExercise(day.id, name)}
           onRemoveExercise={exId => removeExercise(day.id, exId)}

@@ -38,6 +38,9 @@ export default function HistoryView({ planApi, sessionApi }) {
               <span className={styles.dayName}>{day?.name ?? 'Unknown day'}</span>
               <span className={styles.date}>{dateStr} · {timeStr}</span>
             </div>
+            {session.note && (
+              <p className={styles.note}>{session.note}</p>
+            )}
             {session.exercises.map(ex => {
               const exInfo = exerciseById[ex.exerciseId]
               if (!exInfo || ex.sets.length === 0) return null

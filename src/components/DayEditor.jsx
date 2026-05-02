@@ -5,6 +5,7 @@ import styles from './DayEditor.module.css'
 export default function DayEditor({
   day,
   onRename,
+  onUpdateDay,
   onRemoveDay,
   onAddExercise,
   onRemoveExercise,
@@ -55,6 +56,17 @@ export default function DayEditor({
         </button>
       </div>
 
+      <details className={styles.warmup}>
+        <summary className={styles.warmupSummary}>Warmup &amp; prehab (markdown)</summary>
+        <textarea
+          className={styles.warmupField}
+          value={day.warmup ?? ''}
+          onChange={e => onUpdateDay({ warmup: e.target.value })}
+          placeholder="e.g.&#10;- Bike 3–5 min&#10;- Band shoulder openers 1×10&#10;- Wall slides 1×10"
+          rows={4}
+        />
+      </details>
+
       <div className={styles.exHeader}>
         <span style={{ width: '1rem' }} />
         <span className={styles.colLabel} style={{ flex: 1 }}>Exercise</span>
@@ -63,6 +75,8 @@ export default function DayEditor({
         <span className={styles.colLabel}>Reps</span>
         <span style={{ width: '1rem' }} />
         <span className={styles.colLabel}>kg</span>
+        <span style={{ width: '1rem' }} />
+        <span className={styles.colLabel}>RIR</span>
         <span style={{ width: '2rem' }} />
       </div>
 

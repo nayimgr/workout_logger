@@ -44,6 +44,17 @@ export default function ExerciseEditor({ exercise, onUpdate, onRemove, dragHandl
         title="Weight (kg)"
         min="0"
       />
+      <span className={styles.sep}>·</span>
+      <input
+        className={`${styles.field} ${styles.rir}`}
+        type="text"
+        inputMode="text"
+        value={exercise.targetRIR ?? ''}
+        onChange={e => onUpdate({ targetRIR: e.target.value })}
+        aria-label="Target RIR"
+        title="Target RIR (e.g. 2-3)"
+        placeholder="RIR"
+      />
       <button className={styles.remove} onClick={onRemove} aria-label="Remove exercise">
         ×
       </button>

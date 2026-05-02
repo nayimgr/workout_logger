@@ -60,6 +60,12 @@
   text-align: center;
 }
 
+.rir {
+  width: 2.8rem;
+  flex-shrink: 0;
+  text-align: center;
+}
+
 .sep {
   color: var(--text-dim);
   font-size: 0.8rem;

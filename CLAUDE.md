@@ -57,9 +57,9 @@ The export format is the source of truth (see ProgressView export). Schemas:
 
 ```js
 Plan            = { days: Day[] }
-Day             = { id, name, exercises: Exercise[] }
-Exercise        = { id, name, targetSets, targetReps, targetWeight }   // weight in kg
-Session         = { id, date (ISO), dayId, exercises: SessionExercise[] }
+Day             = { id, name, warmup, exercises: Exercise[] }   // warmup is markdown, '' = none
+Exercise        = { id, name, targetSets, targetReps, targetWeight, targetRIR }   // weight in kg; targetRIR is a free-text string (e.g. "2-3"), '' = unset
+Session         = { id, date (ISO), dayId, note, exercises: SessionExercise[] }   // note is freeform string, '' = none
 SessionExercise = { exerciseId, sets: Set[] }
 Set             = { reps, weight, rir }   // all stored as strings from inputs; rir optional (0–5, '' = not recorded)
 ```
@@ -97,28 +97,47 @@ the *signal quality* of that data, not just app polish.
 
 ## Feature priorities (high → low)
 
-1. **Per-set and per-session notes** — short freeform text. "Felt easy,"
-   "elbow tweak," "PR." Searchable in history view.
-
-2. **Bodyweight log** — separate data series (date + weight), independent of
+1. **Bodyweight log** — separate data series (date + weight), independent of
    sessions. Add a 5th localStorage key `wl_bodyweight`. Critical for
-   relative-strength exercises and progress tracking.
+   relative-strength exercises and progress tracking. Coach review cadence
+   is monthly.
 
-3. **Skipped vs unlogged distinction** — explicit "skip" action on an exercise
-   vs leaving sets empty vs aborting a session. Reflected in export.
+2. **First-class day types** — `Day.type: 'strength' | 'climb' | 'cardio' | 'rest'`.
+   Strength logs as today; climb/cardio get a minimal form (duration, modality,
+   RIR/RPE, free-text); rest is a no-op marker. Needed once the full split
+   (climb days, Z2 cycling) is in active rotation.
 
-4. **Coach-friendly export view** — alongside the raw JSON, a flat one-row-per-set
+3. **Day picker replaces auto-advance** — Home should let me pick the day
+   directly; "Finish Workout" should not loop `advanceDay()`. Required for
+   the Wed/Fri pull/lower swap rule in the program.
+
+4. **Skipped vs unlogged distinction** — explicit "skip" action on a session
+   vs leaving sets empty vs aborting a session. Reflected in export. Becomes
+   important once climb/rest days exist in the rotation.
+
+5. **Per-set notes** — short freeform text on a single set ("elbow tweak",
+   "PR"). Per-session note is already in; this is the finer-grained version.
+
+6. **Coach-friendly export view** — alongside the raw JSON, a flat one-row-per-set
    view with: date, dayName, exerciseName (resolved, not just id), set#, reps,
    weight, RIR, note. CSV or a second JSON key. Much easier to reason about.
-
-5. **Cardio session type** — eventually. Once cardio is added to the program,
-   need a session type that logs duration, modality, and intensity (HR zone or
-   RPE) instead of sets/reps/weight.
 
 ### Done
 - **RPE / RIR per set** — optional 0–5 RIR field on each set, shown in the
   logger as a third numeric column and appended to History as `· RIR N`.
   Empty string = not recorded; old exports without `rir` still import.
+- **Target RIR per exercise** — optional free-text `targetRIR` on `Exercise`
+  (e.g. `2-3`). Edited in the Plan editor; rendered next to the set/rep target
+  in the logger as `· RIR 2-3`. The program is written in RPE; convert with
+  RIR ≈ 10 − RPE (RPE 7–8 → RIR 2–3, RPE 8–9 → RIR 1–2).
+- **Per-session note** — optional `note` string on `Session`. Always-visible
+  textarea above the exercises during a live session ("energy / sleep / tib").
+  Renders italic above the sets in History; included in export.
+- **Per-day warmup block** — optional markdown `warmup` string on `Day`.
+  Edited as a collapsible textarea inside the Day editor; rendered as a
+  collapsible "Warmup & prehab" markdown block at the top of the logger.
+  Re-uses `marked` already imported by NotesView. Same `dangerouslySetInnerHTML`
+  caveat applies — fine for single-user local.
 
 ## Coding style
 - **Small, focused changes.** One feature per commit. The commit message should

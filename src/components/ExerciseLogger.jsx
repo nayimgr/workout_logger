@@ -8,7 +8,7 @@ export default function ExerciseLogger({
   onAddSet,
   onRemoveSet,
 }) {
-  const { name, targetSets, targetReps, targetWeight } = exercise
+  const { name, targetSets, targetReps, targetWeight, targetRIR } = exercise
 
   // Always show at least targetSets rows; once the user logs past that, show all logged sets
   const displaySets =
@@ -29,6 +29,7 @@ export default function ExerciseLogger({
         <span className={styles.target}>
           {targetSets}×{targetReps}
           {targetWeight > 0 ? ` @ ${targetWeight}kg` : ''}
+          {targetRIR ? ` · RIR ${targetRIR}` : ''}
         </span>
       </div>
       <div className={styles.columnLabels}>

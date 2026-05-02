@@ -1,10 +1,36 @@
 import { useState } from 'react'
+import { marked } from 'marked'
 import ExerciseLogger from '../components/ExerciseLogger'
 import styles from './HomeView.module.css'
 
+function warmupHtml(text) {
+  try {
+    return marked.parse(text, { async: false })
+  } catch {
+    return ''
+  }
+}
+
+function WarmupBlock({ text }) {
+  const [open, setOpen] = useState(true)
+  return (
+    <details
+      className={styles.warmup}
+      open={open}
+      onToggle={e => setOpen(e.currentTarget.open)}
+    >
+      <summary className={styles.warmupSummary}>Warmup &amp; prehab</summary>
+      <div
+        className={styles.warmupBody}
+        dangerouslySetInnerHTML={{ __html: warmupHtml(text) }}
+      />
+    </details>
+  )
+}
+
 export default function HomeView({ planApi, sessionApi }) {
   const { plan, currentDay, currentDayIndex, advanceDay } = planApi
-  const { sessions, startSession, logSet, addSet, removeSet } = sessionApi
+  const { sessions, startSession, setSessionNote, logSet, addSet, removeSet } = sessionApi
 
   const today = new Date().toISOString().slice(0, 10)
 
@@ -92,6 +118,19 @@ export default function HomeView({ planApi, sessionApi }) {
         </button>
       ) : (
         <>
+          {selectedDay.warmup && (
+            <WarmupBlock text={selectedDay.warmup} />
+          )}
+          <label className={styles.noteLabel}>
+            Session note
+            <textarea
+              className={styles.noteField}
+              value={activeSession.note ?? ''}
+              onChange={e => setSessionNote(activeSessionId, e.target.value)}
+              placeholder="energy / sleep / tib / anything off"
+              rows={2}
+            />
+          </label>
           {selectedDay.exercises.map(exercise => {
             const sessionEx = activeSession.exercises.find(
               e => e.exerciseId === exercise.id

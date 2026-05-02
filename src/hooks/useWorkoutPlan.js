@@ -71,6 +71,13 @@ export function useWorkoutPlan() {
     }))
   }
 
+  function updateDay(dayId, fields) {
+    setPlan(p => ({
+      ...p,
+      days: p.days.map(d => (d.id === dayId ? { ...d, ...fields } : d)),
+    }))
+  }
+
   function reorderDays(fromIndex, toIndex) {
     setPlan(p => {
       const days = [...p.days]
@@ -82,7 +89,7 @@ export function useWorkoutPlan() {
 
   // --- Exercise operations ---
   function addExercise(dayId, name) {
-    const ex = { id: makeId(), name, targetSets: 3, targetReps: 10, targetWeight: 0 }
+    const ex = { id: makeId(), name, targetSets: 3, targetReps: 10, targetWeight: 0, targetRIR: '' }
     setPlan(p => ({
       ...p,
       days: p.days.map(d =>
@@ -136,7 +143,7 @@ export function useWorkoutPlan() {
     currentDay,
     currentDayIndex,
     advanceDay,
-    addDay, removeDay, renameDay, reorderDays,
+    addDay, removeDay, renameDay, updateDay, reorderDays,
     addExercise, removeExercise, updateExercise, reorderExercises,
   }
 }

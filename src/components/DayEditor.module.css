@@ -55,6 +55,41 @@
 
 .removeDay:hover { opacity: 1; }
 
+.warmup {
+  margin: 0.25rem 0 0.75rem;
+  font-size: 0.85rem;
+}
+
+.warmupSummary {
+  cursor: pointer;
+  color: var(--text-dim);
+  padding: 0.25rem 0;
+  list-style: none;
+}
+
+.warmupSummary::-webkit-details-marker { display: none; }
+.warmupSummary::before { content: '▸ '; }
+.warmup[open] .warmupSummary::before { content: '▾ '; }
+
+.warmupField {
+  display: block;
+  width: 100%;
+  margin-top: 0.4rem;
+  padding: 0.5rem;
+  background: var(--surface-2);
+  border: 1px solid var(--border-2);
+  border-radius: 8px;
+  color: var(--text);
+  font-size: 0.85rem;
+  font-family: inherit;
+  resize: vertical;
+  box-sizing: border-box;
+}
+
+.warmupField:focus {
+  outline: 2px solid var(--accent);
+}
+
 .exHeader {
   display: flex;
   align-items: center;
