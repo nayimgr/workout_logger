@@ -83,6 +83,12 @@ When evolving the schema, default missing fields rather than rejecting the impor
   repeatedly. Functional but awkward. Worth simplifying if touched.
 - **NotesView uses `marked` + `dangerouslySetInnerHTML`** — fine for
   single-user local; flag if notes ever become shared/cloud.
+- **Progress charts share a global time X axis.** `buildVolumeSeriesByExercise`
+  returns `{ seriesByExercise, xDomain }`; each chart sets `XAxis type="number"`
+  + `scale="time"` + `domain={xDomain}` so all charts span the same date range.
+  Per-exercise series contains **only** days that exercise was actually worked
+  (no null fillers) — fillers would either reintroduce the dip-to-zero or break
+  line-connecting between dots.
 
 ## Coaching context (why these features matter)
 This app feeds a separate "gym buddy" coaching workflow where the JSON export

@@ -19,7 +19,11 @@ function tooltipFormatter(value, name) {
   return [value, name]
 }
 
-export default function ExerciseChart({ exerciseName, data }) {
+function formatTickDate(t) {
+  return new Date(t).toISOString().slice(5, 10)
+}
+
+export default function ExerciseChart({ exerciseName, data, xDomain }) {
   return (
     <div className={styles.card}>
       <h2 className={styles.name}>{exerciseName}</h2>
@@ -27,9 +31,13 @@ export default function ExerciseChart({ exerciseName, data }) {
         <LineChart data={data} margin={{ top: 8, right: 8, bottom: 4, left: 0 }}>
           <CartesianGrid strokeDasharray="3 3" stroke="#2a3a5c" />
           <XAxis
-            dataKey="date"
+            type="number"
+            dataKey="t"
+            domain={xDomain}
+            scale="time"
             tick={{ fill: '#666', fontSize: 10 }}
-            tickFormatter={d => d.slice(5)}
+            tickFormatter={formatTickDate}
+            allowDataOverflow
           />
           <YAxis
             yAxisId="left"
@@ -46,6 +54,7 @@ export default function ExerciseChart({ exerciseName, data }) {
             contentStyle={{ background: '#16213e', border: '1px solid #2a3a5c', fontSize: 12 }}
             labelStyle={{ color: '#aaa' }}
             formatter={tooltipFormatter}
+            labelFormatter={formatTickDate}
           />
           <Legend wrapperStyle={{ fontSize: 11, paddingTop: 6 }} />
           <Line
@@ -57,6 +66,7 @@ export default function ExerciseChart({ exerciseName, data }) {
             strokeWidth={2}
             dot={{ r: 3, fill: COLOR_VOLUME, strokeWidth: 0 }}
             activeDot={{ r: 5 }}
+            connectNulls={false}
           />
           <Line
             yAxisId="right"

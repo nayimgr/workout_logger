@@ -25,14 +25,14 @@ export default function ProgressView({ planApi, sessionApi }) {
   const { sessions } = sessionApi
   const fileRef = useRef()
 
-  const volumeMap = useMemo(
+  const { seriesByExercise, xDomain } = useMemo(
     () => buildVolumeSeriesByExercise(sessions),
     [sessions]
   )
 
   const allExercises = plan.days.flatMap(d => d.exercises)
   const exercisesWithData = allExercises.filter(
-    ex => volumeMap[ex.id]?.length > 0
+    ex => seriesByExercise[ex.id]?.length > 0
   )
 
   function importData(e) {
@@ -66,7 +66,8 @@ export default function ProgressView({ planApi, sessionApi }) {
           <ExerciseChart
             key={ex.id}
             exerciseName={ex.name}
-            data={volumeMap[ex.id]}
+            data={seriesByExercise[ex.id]}
+            xDomain={xDomain}
           />
         ))
       )}

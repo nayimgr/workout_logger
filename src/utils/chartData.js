@@ -1,12 +1,22 @@
-// Returns { [exerciseId]: [{ date: 'YYYY-MM-DD', volume: number, avgWeight: number|null }] }
-// volume    = sum(reps * weight) across all sets for that day
-// avgWeight = volume / totalReps for that day (null when no reps logged)
+// Returns { seriesByExercise, xDomain }
+//   seriesByExercise[exerciseId] = [{ date, t, volume, avgWeight }] — only days the exercise was worked
+//   xDomain = [minTimestamp, maxTimestamp] across all sessions, so every chart shares the same x-axis
+//
+// volume    = sum(reps * weight) across all sets that day
+// avgWeight = volume / totalReps that day
 export function buildVolumeSeriesByExercise(sessions) {
   // exerciseId -> date -> running { volume, reps } totals
   const raw = {}
+  let xMin = Infinity
+  let xMax = -Infinity
 
   for (const session of sessions) {
     const dateLabel = session.date.slice(0, 10)
+    const t = Date.parse(dateLabel)
+    if (!Number.isNaN(t)) {
+      if (t < xMin) xMin = t
+      if (t > xMax) xMax = t
+    }
     for (const ex of session.exercises) {
       let vol = 0, reps = 0
       for (const set of ex.sets) {
@@ -23,16 +33,19 @@ export function buildVolumeSeriesByExercise(sessions) {
     }
   }
 
-  const result = {}
+  const seriesByExercise = {}
   for (const id in raw) {
-    result[id] = Object.entries(raw[id])
+    seriesByExercise[id] = Object.entries(raw[id])
+      .filter(([, { reps }]) => reps > 0)
       .map(([date, { volume, reps }]) => ({
         date,
+        t: Date.parse(date),
         volume,
-        avgWeight: reps > 0 ? Math.round((volume / reps) * 10) / 10 : null,
+        avgWeight: Math.round((volume / reps) * 10) / 10,
       }))
-      .sort((a, b) => a.date.localeCompare(b.date))
+      .sort((a, b) => a.t - b.t)
   }
 
-  return result
+  const xDomain = xMin === Infinity ? [0, 0] : [xMin, xMax]
+  return { seriesByExercise, xDomain }
 }
