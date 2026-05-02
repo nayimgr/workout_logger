@@ -18,7 +18,7 @@ export default function ExerciseLogger({
           ...sessionSets,
           ...Array.from(
             { length: targetSets - sessionSets.length },
-            () => ({ reps: '', weight: '' })
+            () => ({ reps: '', weight: '', rir: '' })
           ),
         ]
 
@@ -35,6 +35,7 @@ export default function ExerciseLogger({
         <span />
         <span>Reps</span>
         <span>Weight (kg)</span>
+        <span>RIR</span>
         <span />
       </div>
       {displaySets.map((set, i) => (
@@ -43,7 +44,8 @@ export default function ExerciseLogger({
           index={i}
           reps={set.reps}
           weight={set.weight}
-          onChange={(reps, weight) => onLogSet(i, reps, weight)}
+          rir={set.rir ?? ''}
+          onChange={(reps, weight, rir) => onLogSet(i, reps, weight, rir)}
           onRemove={() => onRemoveSet(i)}
         />
       ))}

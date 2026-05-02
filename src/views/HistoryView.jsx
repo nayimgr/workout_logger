@@ -49,12 +49,14 @@ export default function HistoryView({ planApi, sessionApi }) {
                       if (!set) return null
                       const reps = parseFloat(set.reps)
                       const weight = parseFloat(set.weight)
+                      const rir = parseFloat(set.rir)
                       const hasData = !isNaN(reps) || !isNaN(weight)
                       if (!hasData) return null
                       return (
                         <span key={i} className={styles.set}>
                           {!isNaN(reps) ? `${reps}` : '?'}
                           {!isNaN(weight) && weight > 0 ? ` × ${weight}kg` : ' reps'}
+                          {!isNaN(rir) ? ` · RIR ${rir}` : ''}
                         </span>
                       )
                     })}

@@ -101,8 +101,8 @@ export default function HomeView({ planApi, sessionApi }) {
                 key={exercise.id}
                 exercise={exercise}
                 sessionSets={sessionEx?.sets ?? []}
-                onLogSet={(setIndex, reps, weight) =>
-                  logSet(activeSessionId, exercise.id, setIndex, reps, weight)
+                onLogSet={(setIndex, reps, weight, rir) =>
+                  logSet(activeSessionId, exercise.id, setIndex, reps, weight, rir)
                 }
                 onAddSet={() => addSet(activeSessionId, exercise.id)}
                 onRemoveSet={setIndex =>

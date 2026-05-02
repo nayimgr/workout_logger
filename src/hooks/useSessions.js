@@ -14,7 +14,7 @@ export function useSessions() {
     return session.id
   }
 
-  function logSet(sessionId, exerciseId, setIndex, reps, weight) {
+  function logSet(sessionId, exerciseId, setIndex, reps, weight, rir) {
     setSessions(prev =>
       prev.map(session => {
         if (session.id !== sessionId) return session
@@ -24,8 +24,8 @@ export function useSessions() {
             if (ex.exerciseId !== exerciseId) return ex
             const sets = [...ex.sets]
             // Fill any gaps so we never produce a sparse array
-            while (sets.length <= setIndex) sets.push({ reps: '', weight: '' })
-            sets[setIndex] = { reps, weight }
+            while (sets.length <= setIndex) sets.push({ reps: '', weight: '', rir: '' })
+            sets[setIndex] = { reps, weight, rir }
             return { ...ex, sets }
           }),
         }
@@ -41,7 +41,7 @@ export function useSessions() {
           ...session,
           exercises: session.exercises.map(ex => {
             if (ex.exerciseId !== exerciseId) return ex
-            return { ...ex, sets: [...ex.sets, { reps: '', weight: '' }] }
+            return { ...ex, sets: [...ex.sets, { reps: '', weight: '', rir: '' }] }
           }),
         }
       })
